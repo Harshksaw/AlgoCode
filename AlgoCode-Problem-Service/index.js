@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 
 const {PORT} = require("./src/config/server.config");
 const apiRouter = require('./src/routes');
+const BaseError = require('./src/errors/BaseError');
 
 const app = express();
 
@@ -20,4 +21,6 @@ app.use('/api', apiRouter);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}...`)
+
+
 })
