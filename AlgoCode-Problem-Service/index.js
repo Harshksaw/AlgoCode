@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const {PORT} = require("./src/config/server.config");
 const apiRouter = require('./src/routes');
 const BaseError = require('./src/errors/BaseError');
+const { default: connectToDb } = require('./src/config/db.config');
 
 const app = express();
 
@@ -21,8 +22,10 @@ app.use('/api', apiRouter);
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT, async() => {
+    await connectToDb();
     console.log(`Server is running on port ${PORT}...`)
+
 
 
 })
