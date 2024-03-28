@@ -20,3 +20,4 @@ function errorHandler(err, req, res, next){
         data : {} // This is to make sure that the response always has a data field
     })
 }
+module.exports = errorHandler
