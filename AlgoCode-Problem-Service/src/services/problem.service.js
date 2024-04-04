@@ -23,6 +23,11 @@ class ProblemService {
   
   }
 
+  async getProblem(problemId){
+    const problem = await this.problemRepository.getProblemById(problemId);
+    return problem;
+  }
+
 
 }
 

@@ -2,28 +2,23 @@ const marked = require("marked");
 const sanitizeHtml = require("sanitize-html");
 const TurndownService = require("turndown");
 
-
-
 function sanitizeMarkdown(markdownContent) {
-
-    const turndownService = new TurndownService()
+  const turndownService = new TurndownService();
   //1 conver markdown to html
   const convertedHtml = marked.parse(markdownContent);
 
-// console.log("convertedHtml---" , convertedHtml, "---convertedHtml");
+  // console.log("convertedHtml---" , convertedHtml, "---convertedHtml");
 
   //2 sanitize the html
   const sanitizedHtml = sanitizeHtml(convertedHtml, {
-    allowedTags: sanitizeHtml.defaults.allowedTags,
+    allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
   });
 
+  const sanitizeMarkdown = turndownService.turndown(sanitizedHtml);
 
+  //3 convert the sanitized html back to markdown
 
-    const sanitizeMarkdown = turndownService.turndown(sanitizedHtml);
-
-    //3 convert the sanitized html back to markdown
-
-    // console.log("sanitizeMarkdown---" , sanitizeMarkdown, "---sanitizeMarkdown");
+  // console.log("sanitizeMarkdown---" , sanitizeMarkdown, "---sanitizeMarkdown");
 
   return sanitizeMarkdown;
 }
@@ -64,6 +59,5 @@ This is a paragraph of text.
 
 `;
 sanitizeMarkdown(input);
-
 
 module.exports = sanitizeMarkdown;
