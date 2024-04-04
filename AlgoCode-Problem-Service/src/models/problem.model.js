@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Problem = new mongoose.Schema({
+const ProblemSchema = new mongoose.Schema({
     title:{
         typeof: String,
         required: true
@@ -33,3 +33,5 @@ const Problem = new mongoose.Schema({
 
 
 })
+
+const Problem = mongoose.model('Problem', ProblemSchema);
