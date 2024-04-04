@@ -1,3 +1,4 @@
+const { StatusCodes } = require("http-status-codes");
 const BaseError = require("../errors/BaseError");
 
 
@@ -11,7 +12,7 @@ function errorHandler(err, req, res, next){
         })
     }
 
-    app.use(errorHandler)
+
 
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR || 500).json({
         success: false,

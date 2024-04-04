@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 
 const ProblemSchema = new mongoose.Schema({
     title:{
-        typeof: String,
+      type: String,
         required: true
     },
     description:{
-        typeof: String,
+      type: String,
         required:[true, 'Description is required']
     },
     difficulty:{
-        typeof: String,
+      type: String,
         enum: ['easy', 'medium', 'hard'],
         required: true,
         default: 'easy'
@@ -18,20 +18,22 @@ const ProblemSchema = new mongoose.Schema({
     testCases:[
         {
             input: {
-                typeof: String,
+              type: String,
                 required: true
             }
             ,output: {
-                typeof: String,
+              type: String,
                 required: true
             }   
         }
     ],
     editorial:{
-        typeof: String
+      type: String,
+        required: false
     }
 
 
 })
 
 const Problem = mongoose.model('Problem', ProblemSchema);
+module.exports = Problem;

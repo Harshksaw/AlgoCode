@@ -1,4 +1,4 @@
-const {Problem} = require('../models').Problem;
+const {Problem} = require('../models');
 
 class ProblemRepository{
 
@@ -26,4 +26,4 @@ class ProblemRepository{
 
 }
 
-module.exports =ProblemRepository();
+module.exports =ProblemRepository;
