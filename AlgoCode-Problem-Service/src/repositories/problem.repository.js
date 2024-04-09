@@ -1,29 +1,40 @@
-const {Problem} = require('../models').Problem;
+const NotFound = require("../errors/notfound.error");
+const { Problem } = require("../models");
 
-class ProblemRepository{
+class ProblemRepository {
+  async createProblem(problemData) {
+    try {
+      const problem = await Problem.create({
+        title: problemData.title,
+        description: problemData.description,
+        testCases: problemData.testCases ? problemData.testCases : [],
+      });
+      return problem;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 
+  async getAllProblems() {
+    try {
+      const problems = await Problem.find({});
+      return problems;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
 
-    async createProblem(problemData){
-        try {
-            
-            const problem = await Problem.create({
-                title: problemData.title,
-                description: problemData.description,
-                testCases: (problemData.testCases) ? problemData.testCases : [],
+  async getProblemById(problemId) {
 
-            });
-            return problem;
-
-
-        } catch (error) {
-            console.log(error);
-            throw error;
-            
-        }
-
-
+    if(!problemId){
+      throw new NotFound('Problem', problemId)
     }
 
+    const problem = await Problem.findById(problemId);
+    return problem;
+  }
 }
 
-module.exports =ProblemRepository();
+module.exports = ProblemRepository;
