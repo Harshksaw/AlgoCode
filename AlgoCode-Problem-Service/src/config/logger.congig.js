@@ -1,6 +1,11 @@
 const winston = require('winston');
+const { LOG_DB_URL } = require('./server.config');
 const allowedTransports = [];
+require('winston-mongodb');
 
+
+
+//the below transport enable logging on the console
 allowedTransports.push(new winston.transports.Console({
     format: winston.format.combine(
         winston.format.timestamp({
@@ -14,6 +19,23 @@ allowedTransports.push(new winston.transports.Console({
     )
 }))
 
+//the below transport enable logging on the MongoDb db
+allowedTransports.push(new winston.transports.MongoDB({
+    //particular type 
+    level : 'error',
+    db:LOG_DB_URL,
+    collection: 'logs',
+    // metaKey: winston.format.metadata(),
+    // format: winston.format.combine({
+    // })
+    
+
+}) )
+
+allowedTransports.push(new winston.transports.file({
+    filename: `app.log`,
+    
+}))
 
 const logger = winston.createLogger({
 
