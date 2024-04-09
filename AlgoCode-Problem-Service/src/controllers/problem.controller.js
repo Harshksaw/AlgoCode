@@ -63,9 +63,23 @@ async function getProblem(req, res){  //  <- service <- repository
     
   }
 }
+function updateProblem(req , res){
 
-function deleteProblem(req, res) {}
-function updateProblem(req, res) {}
+}
+
+async function deleteProblem(req, res, next) {
+    try {
+        const deletedProblem = await problemService.deleteProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success: true,
+            message: 'Successfully deleted the problem',
+            error: {},
+            data: deletedProblem
+        });
+    } catch(error) {
+        next(error);
+    }
+}
 
 module.exports = {
   addProblem,
