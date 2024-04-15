@@ -2,13 +2,22 @@ const NotImplemented = require("../errors/notimplemented.error");
 const { ProblemService } = require("../services");
 const { ProblemRepository } = require("../repositories");
 const { StatusCodes } = require("http-status-codes");
-
+const logger = require("../config/logger.config");
 const problemService = new ProblemService(new ProblemRepository());
   //Flow -> Controller -> Service -> Repository
 
-function pingProblemController(req, res) {
-  return res.json({message: 'Problem controller is up'});
-}
+  let pingCounter = 0;
+
+  function pingProblemController(req, res) {
+
+    logger.error("ping error logs for ping controller")
+    pingCounter++;
+    return res.json({ message: 'Problem controller is up', pingCount: pingCounter });
+  }
+
+// function pingProblemController(req, res) {
+//   return res.json({message: 'Problem controller is up'});
+// }
 
 async function addProblem(req, res, next) {
   try {
