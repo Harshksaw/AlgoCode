@@ -12,7 +12,7 @@ const containerId = process.env.COSMOS_CONTAINER_NAME
 const client = new CosmosClient({endpoint, key});
 const database = client.database(databaseId)
 const container = database.container(containerId)
-console.log(endpoint  , " from cosmosClient.js", key  , " from cosmosClient.js", databaseId,  " from cosmosClient.js", containerId , " from cosmosClient.js");
+
 //add function
 async function logToCosmosDB(level , message){
     try {
