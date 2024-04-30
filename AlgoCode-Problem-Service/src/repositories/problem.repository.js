@@ -19,6 +19,7 @@ class ProblemRepository {
   async getAllProblems() {
     try {
       const problems = await Problem.find({});
+      //porblem.protype.find.mockResolvedValue([])
       return problems;
     } catch (error) {
       console.log(error);
